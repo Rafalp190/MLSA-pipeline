@@ -1,0 +1,7 @@
+pulp==2.7
+PyYAML
+biopython
+dendropy
+AMAS
+pandas            # For reading Excel files and handling dataframes
+openpyxl          # Required by pandas to read .xlsx files
