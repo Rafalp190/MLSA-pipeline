@@ -5,3 +5,6 @@ dendropy
 AMAS
 pandas            # For reading Excel files and handling dataframes
 openpyxl          # Required by pandas to read .xlsx files
+shiny
+matplotlib
+pymsaviz

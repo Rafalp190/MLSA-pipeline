@@ -1,0 +1,1 @@
+docker run -v /c/Users/rafal/OneDrive/Documents/archive/tesis_2023/src/MLSA-pipeline/mnt/data:/mnt/data -e CORES=4 -it mlst-pipeline   
