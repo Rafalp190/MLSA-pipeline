@@ -1,0 +1,67 @@
+# Configuration tool for running the MLSA Pipeline
+# Set the different parameters that suit your needs
+# Default parameters set for all the tools
+# You only need to modify the parameters of the specific tools you choose
+# each section of the config file specifies parameters for one of the 3 steps in the run
+# alignment, concatenation and inference.
+
+# Set the number of cores to use throught the execution of the process on all paralelizable steps
+# Note: not all of the programs allow for paralelization. This parameter will be used where relevant
+# If paralelization is important ensure you use the correct tool for the job.
+cores: 4
+
+# Alignment step ---------------------------------------------------------------------------------------
+aligner: "clustalw"     # "clustalw" or "muscle"
+## Muscle5 alignment parameters available to set
+## for more information check: 
+muscle_params:
+  perturb: 0            # Integer random number seed
+  perm: "none"          # Guide tree permutation, default "none"
+  stratified: false     # Generate stratified ensemble
+  diversified: false    # Generate diversified ensemble
+  replicates: 4         # Number of replicates
+  consiters: 2          # Number of consistency iterations
+  refineiters: 100      # Number of refinement iterations
+
+## Clustalw parameters available to set
+## for more information check: 
+clustalw_params:
+  gapopen: 15.0         # Gap open weight cost
+  gapextend: 0.2        # Gap extend weight cost
+  numiter: 5            # Number of iterations
+  matrix: "BLOSUM"      # Matrix to use
+
+
+# Concatenation step ------------------------------------------------------------------------------------
+concatenator: "seqkit"  # Choose between "amas" or "seqkit"
+
+## AMAS parameters available to set
+## for more information check: 
+amas_params:
+  check_align: false                  
+
+## SEQKIT parameters available to set
+## for more information check: 
+seqkit_params:
+  full: false        
+
+# Inference step ---------------------------------------------------------------------------------------
+inferer: "mrbayes"   # Choose  between "biophylo", "dendropy" or "mrbayes"
+
+biophylo_params:
+  distance_metric: "benner22" # options: identity, benner22, benner6, benner74, blastn, dayhoff, feng, genetic, gonnet1992, hoxd70, johnson, jones, levin, mclachlan, mdm78, megablast, blastn, rao, risler, schneider, str, trans, blastp, blosum45, blosum50, blosum62, blosum80, blosum90, pam250, pam30, pam70
+  outgroup: null
+  molecular_model: "GTR"
+ 
+dendropy_params:
+  seed: 42
+  termination_condition: "none"
+  optimize_model: false
+
+
+mr_bayes_params:
+  algorithm: "mcmc"
+  ngen: 100000
+  samplefreq: 100
+  nchains: 4
+  burnin: 25000

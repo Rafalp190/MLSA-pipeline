@@ -133,6 +133,6 @@ def server(input, output, session):
     @render.download
     def download_align_FA():
         # Directly specify the path of the Newick file for download
-        return "./mnt/output/concatenated_output.fa"
+        return "./mnt/output/concatenated/concatenated_sequences.fasta"
 # Run the app
 app = App(app_ui, server)

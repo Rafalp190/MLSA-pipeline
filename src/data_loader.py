@@ -6,7 +6,7 @@ from Bio import SeqIO
 # Define paths (assuming you're running from the root of the project)
 input_excel = '/mnt/data/input.xlsx'  # Path to the Excel file (mounted device)
 seq_dir = '/mnt/data/seq/'            # Path to the directory containing the sequences
-log_dir = '/mnt/data/log/'            # Log directory
+log_dir = '/mnt/output/log/'            # Log directory
 
 # Create the log directory if it doesn't exist
 if not os.path.exists(log_dir):
@@ -82,7 +82,7 @@ else:
 
 # Generate the log file
 current_date = datetime.now().strftime('%Y-%m-%d-%H-%M')
-log_file = os.path.join(log_dir, f"data_load_{current_date}.txt")
+log_file = os.path.join(log_dir, f"data_load.log")
 
 # Write to log file
 with open(log_file, 'w') as log:

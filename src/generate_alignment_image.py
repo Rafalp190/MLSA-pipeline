@@ -7,8 +7,8 @@ import numpy as np
 
 def generate_alignment_image():
         # Load the sequence alignment
-        alignment = AlignIO.read("./mnt/output/alignment.fasta", "fasta")
+        alignment = AlignIO.read("./mnt/data/concatenated/concatenated_sequences.fasta", "fasta")
 
         # Create and save alignment visualization using pyMSAviz
         msa_viz = msaviz(alignment, wrap_length=200, show_grid=True, show_consensus=True)
-        msa_viz.savefig("./mnt/output/alignment_plot.png")
+        msa_viz.savefig("./mnt/data/output/alignment_plot.png")
