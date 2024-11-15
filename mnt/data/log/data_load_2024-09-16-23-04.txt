@@ -1,6 +1,0 @@
-Log generated on 2024-09-16-23-04
-Number of organisms: 3
-Number of loci per organism: 3
-Missing files:
- - /mnt/data/seq/S_cerevisiae_rpoB.fasta
-All sequence files are valid.

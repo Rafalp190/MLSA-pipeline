@@ -1,6 +1,0 @@
-# snakefile_config.yaml
-
-cores: 4  # Number of cores to use
-log_dir: /mnt/data/log  # Log directory path
-input_excel: /mnt/data/input.xlsx  # Path to the Excel file
-seq_dir: /mnt/data/seq  # Path to the directory with sequences

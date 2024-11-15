@@ -61,17 +61,24 @@ try:
         nexus_file = concatenated_file.replace(".fasta", ".nex")
         SeqIO.convert(concatenated_file, "fasta", nexus_file, "nexus", "DNA")
 
+        # Extract MrBayes parameters
+        algorithm = mr_bayes_params.get("algorithm", "mcmc")
+        ngen = mr_bayes_params.get("ngen", 10000)
+        samplefreq = mr_bayes_params.get("samplefreq", 100)
+        nchains = mr_bayes_params.get("nchains", 4)
+        burnin = mr_bayes_params.get("burnin", 25000)
+
         # Create the MrBayes command file
         mrbayes_input = f"{os.path.splitext(output_tree)[0]}.mb"
         with open(mrbayes_input, "w") as mb_input:
             mb_input.write(f"begin mrbayes;\n")
             mb_input.write(f"   set autoclose=yes;\n")
             mb_input.write(f"   execute {nexus_file};\n")
-            mb_input.write(f"   mcmc;\n")
-            mb_input.write(f"   sump;\n")
-            mb_input.write(f"   sumt;\n")
+            mb_input.write(f"   lset nst=6 rates=gamma;\n")
+            mb_input.write(f"   {algorithm} ngen={ngen} samplefreq={samplefreq} nchains={nchains} burnin={burnin};\n")
+            mb_input.write(f"   sump burnin={burnin};\n")
+            mb_input.write(f"   sumt burnin={burnin};\n")
             mb_input.write(f"end;\n")
-
         # Execute MrBayes using the command file
         cmd = ["mb", mrbayes_input]
         result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
