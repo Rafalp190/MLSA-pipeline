@@ -59,6 +59,10 @@ COPY src/ /app/src/
 # Set the working directory to /app
 WORKDIR /app
 
+
+# Expose port 3838 for the Shiny dashboard
+EXPOSE 8000
+
 # Specify the entry point for Snakemake or a Python command for testing
 #CMD ["python3", , "-h"]
 CMD ["sh", "-c", "cores=$(yq e '.cores // 1' /mnt/config.yaml) && snakemake --snakefile Snakefile --configfile /mnt/config.yaml --cores $cores | tee /mnt/output/log/snakemake.log"]

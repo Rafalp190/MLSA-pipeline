@@ -61,7 +61,7 @@ dendropy_params:
 
 mr_bayes_params:
   algorithm: "mcmc"
-  ngen: 100000
+  ngen: 10000
   samplefreq: 100
   nchains: 4
   burnin: 25000

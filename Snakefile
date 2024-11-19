@@ -25,7 +25,8 @@ wildcard_constraints:
 rule all:
     threads: int(config["cores"])
     input:
-        "/mnt/output/output_inference.nwk"  # Example of the pipeline's final output
+        "/mnt/output/output_inference.nwk",  # Final pipeline output
+        "/mnt/output/dashboard_ready.log"   # Final dashboard step
 
 # Rule to run the data loader
 rule data_loader:
@@ -90,3 +91,15 @@ rule inference:
         config.get("cores", 1)
     script:
         "/app/src/inference.py"
+
+# Rule to run the Shiny dashboard
+rule dashboard:
+    input:
+        inference_log="/mnt/output/output_inference.nwk"  # Ensure inference step is complete
+    output:
+        touch("/mnt/output/dashboard_ready.log")
+    shell:
+        """
+        shiny run --reload /app/src/app.py --host 0.0.0.0 --port 8000
+        touch {output}
+        """

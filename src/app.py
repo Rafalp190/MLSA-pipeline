@@ -25,7 +25,7 @@ def server(input, output, session):
     def load_tree():
         try:
             # Read the Newick file into a Phylo tree
-            with open("./mnt/output/output_inference.nwk", "r") as f:
+            with open("/mnt/output/output_inference.nwk", "r") as f:
                 tree = Phylo.read(f, "newick")
             return tree
         except FileNotFoundError:
@@ -99,7 +99,7 @@ def server(input, output, session):
     def dendrogram_plot():
         tree_data = load_tree()
         if tree_data is None:
-            return ui.div("File not found: ./mnt/output/output_inference.nwk", style="color:red; font-size:20px;")
+            return ui.div("File not found: /mnt/output/output_inference.nwk", style="color:red; font-size:20px;")
         
         try:
             fig = get_plotly_dendrogram(tree_data)
@@ -113,26 +113,26 @@ def server(input, output, session):
     @render.image
     def alignment_plot():
         # Generate the alignment image file
-        return {"src": "./mnt/output/alignment_plot.png", "alt": "Sequence Alignment"}
+        return {"src": "/mnt/output/alignment_plot.png", "alt": "Sequence Alignment"}
 
     # Create a downloadable file for the Newick data
     @output
     @render.download
     def download_nwk():
         # Directly specify the path of the Newick file for download
-        return "./mnt/output/output_inference.nwk"
+        return "/mnt/output/output_inference.nwk"
     
     @output
     @render.download
     def download_align():
         # Directly specify the path of the Newick file for download
-        return "./mnt/output/alignment_plot.png"
+        return "/mnt/output/alignment_plot.png"
     
         # Create a downloadable file for the Newick data
     @output
     @render.download
     def download_align_FA():
         # Directly specify the path of the Newick file for download
-        return "./mnt/output/concatenated/concatenated_sequences.fasta"
+        return "/mnt/output/concatenated/concatenated_sequences.fasta"
 # Run the app
 app = App(app_ui, server)

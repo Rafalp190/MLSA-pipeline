@@ -8,3 +8,5 @@ openpyxl          # Required by pandas to read .xlsx files
 shiny
 matplotlib
 pymsaviz
+plotly
+scipy
