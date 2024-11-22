@@ -8,15 +8,30 @@ import numpy as np
 
 # Define UI
 app_ui = ui.page_fluid(
-    ui.output_ui("dendrogram_plot"),  # Use output_ui for HTML-based Plotly rendering
-    ui.download_button("download_nwk", "Download Newick File"),
-    ui.div(
-        ui.output_image("alignment_plot"),
-        style="max-height: 300px; overflow: scroll;"  # CSS to limit image height
-    ),
-    ui.download_button("download_align", "Download Alignment image"),
-    ui.download_button("download_align_FA", "Download Alignment FASTA"),
-)
+    ui.h1("MLSA Pipeline Visualizer"),
+    ui.p("Check out the results of the multi locus sequence analysis you just performed"),
+    ui.navset_card_pill(
+        ui.nav_panel("Dendrogram",
+                    ui.card(
+                        ui.card_header("Dendrogram Plot"),
+                        ui.layout_sidebar(
+                            ui.sidebar("", 
+                                    ui.download_button("download_nwk", "Download Newick File") ,position="right", background="#f8f8f8"),
+                                    ui.output_ui("dendrogram_plot")  # Use output_ui for HTML-based Plotly rendering
+                     ))
+   
+        ),
+        ui.nav_panel("Alignment plot",
+                    ui.card(
+                        ui.layout_columns(
+                            ui.download_button("download_align", "Download Alignment image"),
+                            ui.download_button("download_align_FA", "Download Alignment FASTA")
+                        ),
+                        ui.div(
+                            ui.output_image("alignment_plot"),
+                            style="max-height: 500px; overflow: scroll;"  # CSS to limit image height
+                        )
+                    ))))
 
 
 # Server logic
